@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructuras de Datos Fundamentales en Python</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .license-badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .intro-section p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .objectives {
+            background: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .objectives h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .objectives ol {
+            margin-left: 20px;
+            line-height: 2;
+        }
+
+        .objectives li {
+            margin-bottom: 10px;
+        }
+
+        .content-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .structure-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .structure-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .structure-card h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .structure-card .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+
+        .structure-card ul {
+            margin-left: 20px;
+            line-height: 1.9;
+        }
+
+        .structure-card li {
+            margin-bottom: 12px;
+            color: #555;
+        }
+
+        .structure-card strong {
+            color: #764ba2;
+        }
+
+        .resource-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-section h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .resource-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .resource-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .content-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+
+        .content-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .usage-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .usage-section h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 15px;
+        }
+
+        .requirements {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .requirements h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .requirements ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .author-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .author-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .author-section p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        .license-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .license-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .step strong {
+            color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .container {
+                padding: 20px 10px;
+            }
+
+            .intro-section,
+            .content-section,
+            .usage-section,
+            .license-section {
+                padding: 20px;
+            }
+
+            .content-table {
+                font-size: 0.9em;
+            }
+
+            .content-table th,
+            .content-table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>📚 Estructuras de Datos Fundamentales en Python</h1>
+        <p>Una guía práctica y concisa para explorar las estructuras de datos esenciales</p>
+        <div class="license-badge">Licencia MIT</div>
+    </header>
+
+    <div class="container">
+        <!-- Sección de Introducción -->
+        <section class="intro-section">
+            <h2>Acerca de este Proyecto</h2>
+            <p>
+                Este repositorio alberga el <strong>Jupyter Notebook</strong> (<code>EstructuraDeDatos.ipynb</code>), 
+                una guía práctica y concisa diseñada para explorar la implementación y el uso de las estructuras de datos 
+                más esenciales en el ecosistema de Python.
+            </p>
+
+            <div class="objectives">
+                <h3>🎯 Objetivos Principales</h3>
+                <ol>
+                    <li><strong>Demostrar</strong> las funcionalidades y el manejo de las estructuras de datos nativas de Python (Conjuntos y Diccionarios).</li>
+                    <li><strong>Ilustrar</strong> cómo las estructuras nativas pueden ser utilizadas como base para construir estructuras de datos abstractas más complejas, como Pilas y Colas.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Sección de Contenido Detallado -->
+        <section class="content-section">
+            <h2>📖 Contenido Detallado del Notebook</h2>
+            <p style="margin-bottom: 30px;">El cuaderno está estructurado en secciones claras, cada una con ejemplos de código ejecutables y comentarios explicativos.</p>
+
+            <!-- Conjuntos -->
+            <div class="structure-card">
+                <h3><span class="emoji">1️⃣</span> Conjuntos (<code>set</code>)</h3>
+                <p style="margin-bottom: 15px;">Sección dedicada a la estructura de datos <strong>Conjunto</strong>, que garantiza la unicidad de los elementos.</p>
+                <ul>
+                    <li><strong>Creación:</strong> Inicialización de conjuntos y eliminación automática de duplicados.</li>
+                    <li><strong>Operaciones:</strong> Verificación de pertenencia (<code>in</code>).</li>
+                    <li><strong>Utilidad:</strong> Ideal para la eliminación rápida de duplicados y operaciones matemáticas de conjuntos.</li>
+                </ul>
+            </div>
+
+            <!-- Diccionarios -->
+            <div class="structure-card">
+                <h3><span class="emoji">2️⃣</span> Diccionarios (<code>dict</code>)</h3>
+                <p style="margin-bottom: 15px;">Exploración de la estructura de datos clave-valor, fundamental para la gestión de datos mapeados.</p>
+                <ul>
+                    <li><strong>Modelado de Datos:</strong> Uso de diccionarios para representar registros complejos (e.g., datos de estudiantes).</li>
+                    <li><strong>Manipulación:</strong> Ejemplos de modificación y eliminación de claves/valores.</li>
+                    <li><strong>Acceso a Metadatos:</strong> Obtención de todas las claves (<code>keys()</code>) y valores (<code>values()</code>).</li>
+                </ul>
+            </div>
+
+            <!-- Pilas -->
+            <div class="structure-card">
+                <h3><span class="emoji">3️⃣</span> Pilas (Stack - LIFO)</h3>
+                <p style="margin-bottom: 15px;">Implementación de la estructura de datos <strong>Pila</strong> (Last In, First Out).</p>
+                <ul>
+                    <li><strong>Implementación:</strong> Se utiliza una clase <code>Pila</code> que encapsula una lista de Python para simular el comportamiento LIFO.</li>
+                    <li><strong>Métodos Clave:</strong>
+                        <ul style="margin-top: 10px;">
+                            <li><code>apilar()</code> (Push): Agrega un elemento al tope.</li>
+                            <li><code>desapilar()</code> (Pop): Elimina y retorna el elemento del tope.</li>
+                            <li><code>ver_tope()</code> (Peek): Retorna el elemento del tope sin eliminarlo.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ejemplo Práctico:</strong> Demostración de cómo la pila puede ser usada para invertir una cadena de texto.</li>
+                </ul>
+            </div>
+
+            <!-- Colas -->
+            <div class="structure-card">
+                <h3><span class="emoji">4️⃣</span> Colas (Queue - FIFO)</h3>
+                <p style="margin-bottom: 15px;">Implementación de la estructura de datos <strong>Cola</strong> (First In, First Out).</p>
+                <ul>
+                    <li><strong>Implementación:</strong> Se utiliza una clase <code>Cola</code> que encapsula una lista de Python para simular el comportamiento FIFO.</li>
+                    <li><strong>Métodos Clave:</strong>
+                        <ul style="margin-top: 10px;">
+                            <li><code>encolar()</code> (Enqueue): Agrega un elemento al final de la cola.</li>
+                            <li><code>desencolar()</code> (Dequeue): Elimina y retorna el elemento del inicio de la cola.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ejemplo Práctico:</strong> Simulación de un sistema de gestión de pedidos para ilustrar el orden de procesamiento.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Sección de Recursos Adicionales -->
+        <section class="resource-section">
+            <h2>🌐 Recurso Adicional: Listas por Comprensión Anidadas</h2>
+            <p>
+                Como complemento a este estudio de estructuras de datos, se ha desarrollado un recurso web dedicado a una 
+                técnica avanzada de manipulación de listas en Python.
+            </p>
+
+            <h3 style="margin-top: 25px; margin-bottom: 15px;">Python Learning Hub</h3>
+            <p>
+                Este sitio web se centra en una de las herramientas más elegantes y eficientes para la creación de listas 
+                complejas: las <strong>Listas por Comprensión Anidadas</strong>. El recurso aborda en detalle la aplicación 
+                de esta técnica, con un enfoque particular en la <strong>transposición de matrices</strong>.
+            </p>
+
+            <a href="https://listacomprensionanidadas.netlify.app/" class="resource-link" target="_blank">
+                Visitar Listas por Comprensión Anidadas →
+            </a>
+
+            <h3 style="margin-top: 30px; margin-bottom: 15px;">💡 Contenido Destacado del Sitio Web</h3>
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th>Sección</th>
+                        <th>Contenido Clave</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Conceptos</strong></td>
+                        <td>Visualización interactiva de la <strong>Transposición de Matrices</strong> (e.g., de 3x4 a 4x3), explicando cómo las filas se convierten en columnas y las dimensiones se invierten.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ejemplos</strong></td>
+                        <td>Una <strong>Comparación de Métodos</strong> para la transposición de matrices, contrastando: 1) Listas por Comprensión Anidadas, 2) Bucles Tradicionales, y 3) la función <code>zip()</code>. Se destaca que <code>zip()</code> es la opción más concisa y eficiente.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Avanzado</strong></td>
+                        <td>Explicación del <strong>Orden de Evaluación</strong> en las comprensiones anidadas. Presentación de <strong>Casos de Uso Prácticos</strong> para garantizar la legibilidad y el rendimiento del código.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 20px; font-style: italic;">
+                Este recurso es altamente recomendado para profundizar en la manipulación eficiente de estructuras de datos en Python.
+            </p>
+        </section>
+
+        <!-- Sección de Uso y Requisitos -->
+        <section class="usage-section">
+            <h2>🚀 Uso y Requisitos</h2>
+            <p>Para explorar y ejecutar el código de este proyecto, necesitarás:</p>
+
+            <div class="requirements">
+                <h3>Requisitos Previos</h3>
+                <ul>
+                    <li><strong>Python 3.x</strong></li>
+                    <li><strong>Jupyter Notebook</strong> (o JupyterLab)</li>
+                </ul>
+            </div>
+
+            <h3 style="color: #667eea; margin-top: 30px; margin-bottom: 15px;">Pasos para Iniciar</h3>
+
+            <div class="step">
+                <strong>1. Clonar el repositorio:</strong>
+                <div class="code-block">git clone https://github.com/tu-usuario/nombre-del-repositorio.git
+cd nombre-del-repositorio</div>
+            </div>
+
+            <div class="step">
+                <strong>2. Abrir el Notebook:</strong>
+                <p style="margin-top: 10px;">Inicia Jupyter Notebook en tu terminal y abre el archivo <code>EstructuraDeDatos.ipynb</code>.</p>
+                <div class="code-block">jupyter notebook</div>
+            </div>
+        </section>
+
+        <!-- Sección del Autor -->
+        <section class="author-section">
+            <h2>👨‍💻 Autor</h2>
+            <p>Este proyecto y el recurso web complementario fueron creados por:</p>
+            <h3 style="color: #667eea; margin-top: 15px;">Jacobo Morales Londoño</h3>
+        </section>
+
+        <!-- Sección de Licencia -->
+        <section class="license-section">
+            <h2>📄 Licencia MIT</h2>
+            <p>
+                Este proyecto está bajo la <strong>Licencia MIT</strong>.
+            </p>
+            <p>
+                La Licencia MIT es una licencia de software libre permisiva, lo que significa que puedes usar, copiar, 
+                modificar, fusionar, publicar, distribuir, sublicenciar y/o vender copias del software, siempre que se 
+                incluya el aviso de derechos de autor y el aviso de permiso en todas las copias o partes sustanciales del Software.
+            </p>
+            <p>
+                Consulta el archivo <code>LICENSE</code> (que debes crear en tu repositorio) para el texto completo de la licencia.
+            </p>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2024 Estructuras de Datos Fundamentales en Python | Licencia MIT</p>
+        <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Este sitio web fue generado automáticamente con estilos profesionales y responsivos.</p>
+    </footer>
+</body>
+</html>
+
